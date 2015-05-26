@@ -1,0 +1,80 @@
+#include "executeStage.h"
+
+#include "bool.h"
+#include "tools.h"
+#include "instructions.h"
+#include "memoryStage.h"
+
+//E Register holds the input for the execute stage.
+static eregister E;
+
+// pointers to the instruction functions
+static InstructionFunction instructions[16];
+
+/**
+ * Instruction stub which does nothing.
+ */
+static unsigned int doNothing();
+
+/**
+ * Performs the dump instruciton.
+ */
+static unsigned int insDump();
+
+unsigned int doNothing()
+{
+  return 0;
+}
+
+unsigned int insDump()
+{
+  return E.valC;
+}
+
+void initInstructions()
+{
+  for (int i = 0; i < 16; ++i)
+  {
+    instructions[i] = doNothing;
+  }
+
+  instructions[IDUMP] = insDump;
+}
+
+void executeStage()
+{
+  unsigned int Cnd = 0;
+  unsigned int valA = 0;
+  unsigned int dstE = 0xf;
+  unsigned int dstM = 0xf;
+  unsigned int valE = instructions[E.icode](); 
+  updateMregister(E.stat, E.icode, Cnd, valE, valA, dstE, dstM);  
+}
+
+void updateEregister(unsigned int stat, unsigned int icode,
+       unsigned int ifun, unsigned int valC, unsigned int valA,
+       unsigned int valB, unsigned int dstE, unsigned int dstM,
+       unsigned int srcA, unsigned int srcB)
+{
+  E.stat = stat;
+  E.icode = icode;
+  E.ifun = ifun;
+  E.valC = valC;
+  E.valA = valA;
+  E.valB = valB;
+  E.dstE = dstE;
+  E.dstM = dstM;
+  E.srcA = srcA;
+  E.srcB = srcB;
+}
+
+eregister getEregister()
+{
+  return E;
+}
+
+void clearEregister()
+{
+  clearBuffer((char *) &E, (sizeof(E)));
+}
+

@@ -1,0 +1,48 @@
+  .pos 0
+
+  irmovl $5, %ecx
+  irmovl n, %ebx
+  nop
+  nop
+  nop
+  nop
+
+#valA and valB: e_valE
+  xorl %eax, %eax
+  addl %ecx, %eax
+  addl %eax, %eax
+  dump 1
+
+#valA and valB: m_valM
+  xorl %edx, %edx
+  mrmovl (%ebx), %edx
+  nop
+  addl %edx, %edx
+  dump 1
+
+#valA and valB: M_valE
+  xorl %eax, %eax
+  addl %ecx, %eax
+  nop
+  addl %eax, %eax
+  dump 1
+
+#valA and valB: W_valM
+  xorl %edx, %edx
+  mrmovl (%ebx), %edx
+  nop
+  nop
+  addl %edx, %edx
+  dump 1
+
+#valA and valB: W_valE
+  xorl %eax, %eax
+  addl %ecx, %eax
+  nop
+  nop
+  addl %eax, %eax
+  dump 1
+
+.pos 0xa0
+n:
+  .long 5

@@ -1,0 +1,75 @@
+                      | 
+  0x000:              |   .pos 0x000
+  0x000:              | init:
+  0x000: 30f400010000 |   irmovl Stack, %esp
+                      | 
+  0x006: 30f0a0000000 |   irmovl array1, %eax
+                      | 
+                      | #array1[0]
+  0x00c: 503000000000 |   mrmovl (%eax), %ebx
+  0x012: 10           |   nop
+  0x013: a03f         |   pushl %ebx
+                      | #array1[1]
+  0x015: 503004000000 |   mrmovl 4(%eax), %ebx
+  0x01b: 10           |   nop
+  0x01c: a03f         |   pushl %ebx
+                      | #array1[2]
+  0x01e: 503008000000 |   mrmovl 8(%eax), %ebx
+  0x024: 10           |   nop
+  0x025: a03f         |   pushl %ebx
+                      | #array1[3]
+  0x027: 50300c000000 |   mrmovl 12(%eax), %ebx
+  0x02d: 10           |   nop
+  0x02e: a03f         |   pushl %ebx
+                      | #array1[4]
+  0x030: 503010000000 |   mrmovl 16(%eax), %ebx
+  0x036: 10           |   nop
+  0x037: a03f         |   pushl %ebx
+  0x039: c005000000   |   dump 5
+                      | 
+  0x03e: 6300         |   xorl %eax, %eax
+  0x040: 6333         |   xorl %ebx, %ebx
+                      | 
+  0x042: 30f0b4000000 |   irmovl array2, %eax
+                      | 
+                      | #array2[4]
+  0x048: b03f         |   popl %ebx
+  0x04a: 10           |   nop
+  0x04b: 403010000000 |   rmmovl %ebx, 16(%eax)
+                      | #array2[3]
+  0x051: b03f         |   popl %ebx
+  0x053: 10           |   nop
+  0x054: 40300c000000 |   rmmovl %ebx, 12(%eax)
+                      | #array2[2]
+  0x05a: b03f         |   popl %ebx
+  0x05c: 10           |   nop
+  0x05d: 403008000000 |   rmmovl %ebx, 8(%eax)
+                      | #array2[1]
+  0x063: b03f         |   popl %ebx
+  0x065: 10           |   nop
+  0x066: 403004000000 |   rmmovl %ebx, 4(%eax)
+                      | #array2[0]
+  0x06c: b03f         |   popl %ebx
+  0x06e: 10           |   nop
+  0x06f: 403000000000 |   rmmovl %ebx, (%eax)
+                      | 
+  0x075: c005000000   |   dump 5
+                      | 
+  0x0a0:              |   .pos 0x0a0
+  0x0a0:              | array1:
+  0x0a0: 01000000     |   .long 1
+  0x0a4: 02000000     |   .long 2
+  0x0a8: 03000000     |   .long 3
+  0x0ac: 04000000     |   .long 4
+  0x0b0: 05000000     |   .long 5
+                      | 
+  0x0b4:              | array2:
+  0x0b4: aaaaaaaa     |   .long 0xaaaaaaaa
+  0x0b8: bbbbbbbb     |   .long 0xbbbbbbbb
+  0x0bc: cccccccc     |   .long 0xcccccccc
+  0x0c0: dddddddd     |   .long 0xdddddddd
+  0x0c4: eeeeeeee     |   .long 0xeeeeeeee
+                      | 
+  0x100:              |   .pos 0x100
+  0x100:              | Stack:
+                      | 

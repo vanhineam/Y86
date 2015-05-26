@@ -1,0 +1,69 @@
+  .pos 0x000
+init:
+  irmovl array1, %ebx
+  irmovl array2, %ecx
+
+#index 0
+  rrmovl %ebx, %esp
+  popl %eax
+  rrmovl %ecx, %esp
+  irmovl $4, %edx
+  addl %edx, %esp
+  pushl %eax
+
+#index 1
+  rrmovl %ebx, %esp
+  addl %edx, %esp
+  popl %eax
+  rrmovl %ecx, %esp
+  irmovl $8, %edx
+  addl %edx, %esp
+  pushl %eax
+
+#index 2
+  rrmovl %ebx, %esp
+  addl %edx, %esp
+  popl %eax
+  rrmovl %ecx, %esp
+  irmovl $12, %edx
+  addl %edx, %esp
+  pushl %eax
+
+#index 3
+  rrmovl %ebx, %esp
+  addl %edx, %esp
+  popl %eax
+  rrmovl %ecx, %esp
+  irmovl $16, %edx
+  addl %edx, %esp
+  pushl %eax
+
+#index 4
+  rrmovl %ebx, %esp
+  addl %edx, %esp
+  popl %eax
+  rrmovl %ecx, %esp
+  irmovl $20, %edx
+  addl %edx, %esp
+  pushl %eax
+
+  dump 5
+
+  .pos 0x0a0
+array1:
+  .long 1
+  .long 2
+  .long 3
+  .long 4
+  .long 5
+
+array2:
+  .long 0xaaaaaaaa
+  .long 0xbbbbbbbb
+  .long 0xcccccccc
+  .long 0xdddddddd
+  .long 0xeeeeeeee
+
+  .pos 0x100
+Stack:
+

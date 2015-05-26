@@ -1,0 +1,40 @@
+#include "bool.h"
+#include "tools.h"
+#include "memoryStage.h"
+#include "writebackStage.h"
+
+//M register holds the input for the memory stage.
+static mregister M;
+
+void memoryStage()
+{
+<<<<<<< HEAD
+  unsigned int valM = 0;
+  updateWregister(M.stat, M.icode, M.valE, valM, M.dstE, M.dstM);
+=======
+  updateWregister(M.stat, M.icode, M.Cnd, M.valE, M.valA, M.dstE, M.dstM);
+>>>>>>> 9c3b574a67109f321c95426eafa5d6f6cbea231f
+}
+
+void updateMregister(unsigned int stat, unsigned int icode,
+    unsigned int Cnd, unsigned int valE, unsigned int valA,
+    unsigned int dstE, unsigned int dstM)
+{
+  M.stat = stat;
+  M.icode = icode;
+  M.Cnd = Cnd;
+  M.valE = valE;
+  M.valA = valA;
+  M.dstE = dstE;
+  M.dstM = dstM;
+}
+
+mregister getMregister()
+{
+  return M;
+}
+
+void clearMregister()
+{
+  clearBuffer((char *) &M, sizeof(M));
+}

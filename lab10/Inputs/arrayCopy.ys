@@ -1,0 +1,57 @@
+		.pos 0
+init:	irmovl Stack, %esp
+		dump 5
+
+Main:
+		irmovl array1, %edx
+		irmovl array2, %ebx
+		pushl %edx
+		call copyArray
+		halt
+
+copyArray:
+		#array[0]
+		mrmovl (%edx), %ecx
+		nop
+		rmmovl %ecx, (%ebx)
+
+		#array[1]
+		mrmovl 4(%edx), %ecx
+		nop
+		rmmovl %ecx, 4(%ebx)
+
+		#array[2]
+		mrmovl 8(%edx), %ecx
+		nop
+		rmmovl %ecx, 8(%ebx)
+
+		#array[3]
+		mrmovl 12(%edx), %ecx
+		nop
+		rmmovl %ecx, 12(%ebx)
+
+		#array[4]
+		mrmovl 16(%edx), %ecx
+		nop
+		rmmovl %ecx, 16(%ebx)
+
+		dump 5
+		ret
+
+	.pos 0xa0
+array1:
+		.long 0x1
+		.long 0x2
+		.long 0x3
+		.long 0x4
+		.long 0x5
+
+array2:
+		.long 0xaaaaaaaa
+		.long 0xbbbbbbbb
+		.long 0xcccccccc
+		.long 0xdddddddd
+		.long 0xeeeeeeee
+
+	.pos 0x100
+Stack:

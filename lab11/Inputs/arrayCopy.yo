@@ -1,0 +1,58 @@
+                      | 
+  0x000:              |  		.pos 0
+  0x000: 30f400010000 | init:	irmovl Stack, %esp
+  0x006: c005000000   |  		dump 5
+                      | 
+  0x00b:              | Main:
+  0x00b: 30f2a0000000 |  		irmovl array1, %edx
+  0x011: 30f3b4000000 |  		irmovl array2, %ebx
+  0x017: a02f         |  		pushl %edx
+  0x019: 801f000000   |  		call copyArray
+  0x01e: 00           |  		halt
+                      | 
+  0x01f:              | copyArray:
+                      |  		#array[0]
+  0x01f: 501200000000 |  		mrmovl (%edx), %ecx
+  0x025: 10           |  		nop
+  0x026: 401300000000 |  		rmmovl %ecx, (%ebx)
+                      | 
+                      |  		#array[1]
+  0x02c: 501204000000 |  		mrmovl 4(%edx), %ecx
+  0x032: 10           |  		nop
+  0x033: 401304000000 |  		rmmovl %ecx, 4(%ebx)
+                      | 
+                      |  		#array[2]
+  0x039: 501208000000 |  		mrmovl 8(%edx), %ecx
+  0x03f: 10           |  		nop
+  0x040: 401308000000 |  		rmmovl %ecx, 8(%ebx)
+                      | 
+                      |  		#array[3]
+  0x046: 50120c000000 |  		mrmovl 12(%edx), %ecx
+  0x04c: 10           |  		nop
+  0x04d: 40130c000000 |  		rmmovl %ecx, 12(%ebx)
+                      | 
+                      |  		#array[4]
+  0x053: 501210000000 |  		mrmovl 16(%edx), %ecx
+  0x059: 10           |  		nop
+  0x05a: 401310000000 |  		rmmovl %ecx, 16(%ebx)
+                      | 
+  0x060: c005000000   |  		dump 5
+  0x065: 90           |  		ret
+                      | 
+  0x0a0:              |  	.pos 0xa0
+  0x0a0:              | array1:
+  0x0a0: 01000000     |  		.long 0x1
+  0x0a4: 02000000     |  		.long 0x2
+  0x0a8: 03000000     |  		.long 0x3
+  0x0ac: 04000000     |  		.long 0x4
+  0x0b0: 05000000     |  		.long 0x5
+                      | 
+  0x0b4:              | array2:
+  0x0b4: aaaaaaaa     |  		.long 0xaaaaaaaa
+  0x0b8: bbbbbbbb     |  		.long 0xbbbbbbbb
+  0x0bc: cccccccc     |  		.long 0xcccccccc
+  0x0c0: dddddddd     |  		.long 0xdddddddd
+  0x0c4: eeeeeeee     |  		.long 0xeeeeeeee
+                      | 
+  0x100:              |  	.pos 0x100
+  0x100:              | Stack:
